@@ -4,9 +4,7 @@ var express = require('express');
 
 
 /* GET home page. */
-router.get('/', function(req, res){
-	res.render('index');
-});
+router.get('/', controller.index);
 /* GET Add page. */
 router.get('/add', function(req, res){
 	res.render('add');

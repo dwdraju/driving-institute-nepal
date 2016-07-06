@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     controller = require('../controllers/controller');
-router.get('/:id',controller.each);
+router.get('/:permalink',controller.single);
 
 router.get('/',controller.index);
 

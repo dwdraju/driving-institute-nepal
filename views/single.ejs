@@ -6,6 +6,7 @@
 
 <!-- CSS (load bootstrap from a CDN) -->
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link href="/css/style.css" rel="stylesheet" type="text/css">
 <style>
     body    { padding-top:50px; }
 </style>
@@ -33,17 +34,14 @@
     </header>
 
     <main>
-    <%for (var i in result){%>
-        <div class="panel panel-default">
-    <div class="panel-body"><%=result[i].title%></div> 
-    <div class="panel-footer clearfix">
-        <div class="pull-right">
-            <a href="/centres/<%=result[i].permalink%>" class="btn btn-primary">Detail</a>
-            </div>
+    <div>
+        Name of Driving Center: <%= result.title%> <br/>
+        Location: <%= result.location%> <br/>
     </div>
+    <!-- Responsive iFrame -->
+<div class="Flexible-container">
+    <iframe width="425" height="150" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/view?key=AIzaSyD7joY2f7zOhaNl-5lgJmTaj1QKD1BQNq8&center=27.6947573,85.3223087&zoom=15"></iframe>
 </div>
-       <% }%>
-        
     </main>
 
     <footer>

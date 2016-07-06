@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var DrivingSchema = new Schema({
     title: { type: String },
-    description: { type: String },
+    location: { type: String },
     permalink: {type: String},
 });
 module.exports = mongoose.model('Driving', DrivingSchema);
