@@ -34,6 +34,7 @@
     </header>
 
     <main>
+    <div class="row">
     <div class="col-md-6">
         <form method="post" action="/add">
 
@@ -56,44 +57,125 @@
     </div> 
     <div class="form-group"> 
     <label for="description" class="control-label">Select Services Available</label>
-    <label class="checkbox-inline"><input type="checkbox" value="" name="bike" id="bike">Bike</label>
-    <label class="checkbox-inline"><input type="checkbox" value="" name="car" id="car">Car</label>
-    <label class="checkbox-inline"><input type="checkbox" value="" name="other" id="other">Other</label>
+    <label class="checkbox-inline"><input type="checkbox" value="true" name="bike" id="bike">Bike</label>
+    <label class="checkbox-inline"><input type="checkbox" value="true" name="car" id="car">Car</label>
+    <label class="checkbox-inline"><input type="checkbox" value="true" name="other" id="other">Other</label>
     </div>
     <div class="form-group" style="display: none" id="biken">
         <label for="description" class="control-label" >Number of Bike Available</label>
         <input type="text" class="form-control bfh-number" id="bike_num" name="bike_num" data-min="1" data-max="20">
     </div> 
+    <div class="form-group" style="display: none" id="bikec">
+        <label for="description" class="control-label" >Charge for Bike/hr</label>
+        <input type="text" class="form-control bfh-number" id="bike_cost" name="bike_cost" data-min="1" data-max="2000">
+    </div>
     <div class="form-group" style="display: none" id="carn"> 
         <label for="description" class="control-label">Number of Car Available</label>
         <input type="text" class="form-control bfh-number" id="car_num" name="car_num" data-min="1" data-max="20">
     </div>
+    <div class="form-group" style="display: none" id="carc">
+        <label for="description" class="control-label" >Charge for Car/hr</label>
+        <input type="text" class="form-control bfh-number" id="car_cost" name="car_cost" data-min="1" data-max="2000">
+    </div> 
     <div class="form-group" style="display: none" id="others"> 
         <label for="description" class="control-label">Specify Other</label>
-        <input type="text" class="form-control" id="other_sp" name="other_sp" placeholder="Baneshwor">
+        <input type="text" class="form-control" id="other_sp" name="other_sp" placeholder="Bus/Truck">
     </div>
      
+     <div class="form-group"> 
+        <label for="description" class="control-label">Description/Comment</label>
+        <textarea class="form-control" id="description" name="description" rows="5"></textarea>
+    </div> 
 
 
-    <div class="form-group"> 
+    <div class="form-group" style="display:none"> 
         <label for="description" class="control-label">Coordinates</label>
         <input type="text" class="form-control" id="coordinate" name="coordinate" placeholder="Baneshwor">
     </div> 
-    <div class="form-group"> 
-        <label for="description" class="control-label">Location</label>
-        <input type="text" class="form-control" id="location" name="location" placeholder="Baneshwor">
-    </div> 
-    <div class="form-group"> 
-        <label for="description" class="control-label">Location</label>
-        <input type="text" class="form-control" id="location" name="location" placeholder="Baneshwor">
-    </div>   
+  
     <div class="form-group"> <!-- Submit Button -->
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>     
     
 </form>
 </div>
-        
+<div class="col-md-6">
+            <p style="font-size: 18px; font-weight:bold;margin-top:1rem;">Select your location on the map </p>
+            <div id="map" style="border:1px solid #ccc">
+
+            </div>
+            <script>
+                var map;
+                var gmarkers = [];
+                function removeMarkers(){
+                    for(i=0; i<gmarkers.length; i++){
+                        gmarkers[i].setMap(null);
+                    }
+                }
+
+                function initMap() {
+
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: {lat: 0, lng: 0},
+                        zoom: 15
+                    });
+
+
+
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function(position) {
+                            var pos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            };
+
+                            map.setCenter(pos);
+                        }, function() {
+                            handleLocationError(true, null, map.getCenter());
+                        });
+                    } else {
+                        handleLocationError(false, null, map.getCenter());
+                    }
+
+                    var geocoder = new google.maps.Geocoder;
+
+                    map.addListener('click',function(event){
+                        removeMarkers();
+                        console.log(event.latLng);
+                        var pos = {
+                            lat: event.latLng.lat(),
+                            lng: event.latLng.lng()
+                        };
+
+                        //map.panTo(pos);
+
+                        geocoder.geocode({'location': pos}, function(results, status) {
+                            if (status === google.maps.GeocoderStatus.OK) {
+                                if (results[1]) {
+                                    var marker = new google.maps.Marker({
+                                        position: pos,
+                                        map: map
+                                    });
+                                    gmarkers.push(marker);
+                                    console.log(results[1].formatted_address);
+                                    document.getElementById("address").value = results[1].formatted_address;
+                                    document.getElementById("coordinates").value = Math.round(pos.lat*10000)/10000+","+Math.round(pos.lng*10000)/10000;
+                                } else {
+                                    window.alert('No results found');
+                                }
+                            } else {
+                                window.alert('Geocoder failed due to: ' + status);
+                            }
+                        });
+                    })
+
+                }
+            </script>
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKKE73Wjtg-Vwl491L9OwndxtvjP5VDeY&callback=initMap"
+            async defer></script>
+        </div>
+    </div>
     </main>
 
     <footer>
@@ -109,8 +191,10 @@
         $("#bike").click(function () {
             if ($(this).is(":checked")) {
                 $("#biken").show();
+                $("#bikec").show();
             } else {
                 $("#biken").hide();
+                $("#bikec").hide();
             }
         });
     });
@@ -118,8 +202,10 @@
         $("#car").click(function () {
             if ($(this).is(":checked")) {
                 $("#carn").show();
+                $("#carc").show();
             } else {
                 $("#carn").hide();
+                $("#carc").hide();
             }
         });
     });

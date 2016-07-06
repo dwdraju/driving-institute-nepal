@@ -37,6 +37,20 @@
     <div>
         Name of Driving Center: <%= result.title%> <br/>
         Location: <%= result.location%> <br/>
+        Phone No.: <%= result.phone%> <br/>
+        Mobile No.: <%= result.mobile%> <br/>
+        Location: <%= result.location%> <br/>
+        <% if(result.bike == true){%>
+        Number of Bike Available: <%= result.bike_num%><br/>
+        Charge for Bike/hr: <%= result.bike_cost%><br/>
+        <% }%>
+        <% if(result.car == true){%>
+        Number of Car Available: <%= result.car_num%><br/>
+        Charge for Car/hr: <%= result.car_cost%><br/>
+        <% }%>
+        Other Facilities: <%= result.other%><br/>
+        Description/Comment: <%= result.description%><br/>
+
     </div>
     <!-- Responsive iFrame -->
 <div class="Flexible-container">
