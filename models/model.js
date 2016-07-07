@@ -16,6 +16,7 @@ var DrivingSchema = new Schema({
     other_sp: {type: String},
     coordinate: {type: String},
     location: { type: String },
-    description: {type: String}
+    description: {type: String},
+    _id: false
 });
 module.exports = mongoose.model('Driving', DrivingSchema);

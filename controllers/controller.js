@@ -14,20 +14,20 @@ module.exports = {
 
 	add: function(req, res, next){
 		var title = req.body.title,
-			phone = req.body.phone,
-			mobile = req.body.mobile,
-			bike = req.body.bike,
-			car = req.body.bike,
-			other = req.body.other,
-			bike_num = req.body.bike_num,
-			car_num = req.body.car_num,
-			bike_cost = req.body.bike_cost,
-			car_cost = req.body.car_cost,
-			other_sp = req.body.other_sp,
-			coordinate = req.body.coordinate,
-			location = req.body.location,
-			description = req.body.description
-			;
+		phone = req.body.phone,
+		mobile = req.body.mobile,
+		bike = req.body.bike,
+		car = req.body.bike,
+		other = req.body.other,
+		bike_num = req.body.bike_num,
+		car_num = req.body.car_num,
+		bike_cost = req.body.bike_cost,
+		car_cost = req.body.car_cost,
+		other_sp = req.body.other_sp,
+		coordinate = req.body.coordinate,
+		location = req.body.location,
+		description = req.body.description
+		;
 		parameterize = function (str) {
 			return str.trim().replace(/[^a-zA-Z0-9-\s]/g, '').replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
 		}
@@ -76,54 +76,47 @@ module.exports = {
 
 	save:function(req,res,next){
 		var title = req.body.title,
-			phone = req.body.phone,
-			mobile = req.body.mobile,
-			bike = req.body.bike,
-			car = req.body.bike,
-			other = req.body.other,
-			bike_num = req.body.bike_num,
-			car_num = req.body.car_num,
-			bike_cost = req.body.bike_cost,
-			car_cost = req.body.car_cost,
-			other_sp = req.body.other_sp,
-			coordinate = req.body.coordinate,
-			location = req.body.location,
-			description = req.body.description
-			;
-		   
+		phone = req.body.phone,
+		mobile = req.body.mobile,
+		bike = req.body.bike,
+		car = req.body.bike,
+		other = req.body.other,
+		bike_num = req.body.bike_num,
+		car_num = req.body.car_num,
+		bike_cost = req.body.bike_cost,
+		car_cost = req.body.car_cost,
+		other_sp = req.body.other_sp,
+		coordinate = req.body.coordinate,
+		location = req.body.location,
+		description = req.body.description,
+		permalink = req.params.permalink
+		;
 		
-		 DriveModel.findOne({permaink: req.params.permalink}, function(err, data) {
-
-            if (err)
-                res.send(err);
-
-            var newData = new DriveModel({
-			title: title,
-			phone: phone,
-			mobile: mobile,
-			bike: bike,
-			car: car,
-			other: other,
-			bike_num: bike_num,
-			car_num: car_num,
-			bike_cost: bike_cost,
-			car_cost: car_cost,
-			other_sp: other_sp,
-			coordinate: coordinate,
-			location: location,
-			
+		
+		DriveModel.findOne({permalink: permalink}, function(err, data) {
+			if (err)
+				res.send(err);
+			var newData = new DriveModel({
+				title: title,
+				phone: phone,
+				mobile: mobile,
+				bike: bike,
+				car: car,
+				other: other,
+				bike_num: bike_num,
+				car_num: car_num,
+				bike_cost: bike_cost,
+				car_cost: car_cost,
+				other_sp: other_sp,
+				coordinate: coordinate,
+				location: location,
+			});
+			DriveModel.update({_id:data._id}, newData, function(err, result) {
+				if (err)
+					res.send(err);
+				else{res.redirect('/centres/'+permalink);}                
+			});
 		});
-            newData.save(function(err) {
-                if (err)
-                    res.send(err);
-
-                res.json({ message: 'data updated!' });
-            });
-
-        })
-
 	}
-
-
 };
 
