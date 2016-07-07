@@ -133,6 +133,22 @@ module.exports = {
 				else{res.redirect('/centres/'+permalink);}                
 			});
 		});
+	},
+	delete: function(req, res, next){
+		var permalink = req.params.permalink;
+		DriveModel.findOne({permalink: permalink}, function(err, data) {
+			if (err)
+				res.send(err);
+			DriveModel.remove({_id:data._id}, function(err, result) {
+			if (err)
+				res.send(err);
+			else{
+
+				req.flash('success', 'The centre was successfully deletedd');
+				res.redirect("/");}                
+			});
+		});
+
 	}
 };
 

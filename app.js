@@ -6,18 +6,43 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var multer = require('multer');
+var flash = require('connect-flash');
+var session = require('express-session');
+
+var sessionStore = new session.MemoryStore;
 
 var mongo = require('mongodb');
 mongoose.connect('mongodb://localhost/driving');
 mongoose.connection.on('open', function() {
-    console.log('Mongoose connected.');
+  console.log('Mongoose connected.');
 });
 
 var routes = require('./routes/index');
 var centres = require('./routes/centres');
 
 var app = express();
+app.use(cookieParser('secret'));
+app.use(session({
+  cookie: { maxAge: 60000 },
+  store: sessionStore,
+  saveUninitialized: true,
+  resave: 'true',
+  secret: 'secret'
+}));
+app.use(flash());
 
+app.use(function(req, res, next){
+    // if there's a flash message in the session request, make it available in the response, then delete it
+    res.locals.sessionFlash = req.session.sessionFlash;
+    delete req.session.sessionFlash;
+    next();
+  });
+
+app.use(function(req, res, next){
+  res.locals.success = req.flash('success');
+  res.locals.errors = req.flash('error');
+  next();
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

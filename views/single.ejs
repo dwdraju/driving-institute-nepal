@@ -2,97 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<title>Driving Centres in Nepal</title>
+    <title>Driving Centres in Nepal</title>
 
-<!-- CSS (load bootstrap from a CDN) -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link href="/css/style.css" rel="stylesheet" type="text/css">
-<style>
-    body    { padding-top:50px; }
-</style>
+    <!-- CSS (load bootstrap from a CDN) -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <style>
+        body    { padding-top:50px; }
+    </style>
 </head>
 <body class="container">
 
     <header>
         <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
+            <div class="container-fluid">
 
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">
-                <span class="glyphicon glyphicon glyphicon-map-marker"></span>
-                Driving Centres in Nepal
-            </a>
-        </div>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <span class="glyphicon glyphicon glyphicon-map-marker"></span>
+                        Driving Centres in Nepal
+                    </a>
+                </div>
 
-        <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/add">Add</a></li>
-        </ul>
-      
-    </div>
-</nav>
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/add">Add</a></li>
+                </ul>
+
+            </div>
+        </nav>
     </header>
 
     <main>
-    <div class="row">
-    <div class="col-md-4">
-        Name of Driving Center: <%= result.title%> <br/>
-        Location: <%= result.location%> <br/>
-        Phone No.: <%= result.phone%> <br/>
-        Mobile No.: <%= result.mobile%> <br/>
-        Location: <%= result.location%> <br/>
-        <% if(result.bike == true){%>
-        Number of Bike Available: <%= result.bike_num%><br/>
-        Charge for Bike/hr: <%= result.bike_cost%><br/>
-        <% }%>
-        <% if(result.car == true){%>
-        Number of Car Available: <%= result.car_num%><br/>
-        Charge for Car/hr: <%= result.car_cost%><br/>
-        <% }%>
-        <% if(result.other == true){%>
-        Other Facilities: <%= result.other_sp%><br/>
-        <% }%>
-        Description/Comment: <%= result.description%><br/>
-        Coordinate: <%= result.coordinate %><br />
+        <div class="row">
+            <div class="col-md-4">
+                Name of Driving Center: <%= result.title%> <br/>
+                Location: <%= result.location%> <br/>
+                Phone No.: <%= result.phone%> <br/>
+                Mobile No.: <%= result.mobile%> <br/>
+                Location: <%= result.location%> <br/>
+                <% if(result.bike == true){%>
+                Number of Bike Available: <%= result.bike_num%><br/>
+                Charge for Bike/hr: <%= result.bike_cost%><br/>
+                <% }%>
+                <% if(result.car == true){%>
+                Number of Car Available: <%= result.car_num%><br/>
+                Charge for Car/hr: <%= result.car_cost%><br/>
+                <% }%>
+                <% if(result.other == true){%>
+                Other Facilities: <%= result.other_sp%><br/>
+                <% }%>
+                Description/Comment: <%= result.description%><br/>
+                Coordinate: <%= result.coordinate %><br />
 
-    </div>
-    <div class="col-md-8">
-        <iframe width="427" height="240" src="https://www.youtube.com/embed/3u4eLonVccw" frameborder="0" allowfullscreen></iframe>
-    </div>
-    </div>
-    <!-- Responsive iFrame -->
-    <script type="text/javascript">
-        var coor = result.coordinate;
-        console.log(coor);
+            </div>
+            <div class="col-md-8">
+                <iframe width="427" height="240" src="https://www.youtube.com/embed/3u4eLonVccw" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <!-- Responsive iFrame -->
+        <script type="text/javascript">
+            var coor = result.coordinate;
+            console.log(coor);
+        </script>
+        <script>
+
+          function initMap() {
+            var myLatLng = {lat: -25.363, lng: 131.044};
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 4,
+              center: myLatLng
+          });
+
+            var marker = new google.maps.Marker({
+              position: myLatLng,
+              map: map,
+              title: 'Hello World!'
+          });
+        }
     </script>
-    <script>
+<% if(result.coordinate) {%>
+    <div class="Flexible-container">
+        <iframe width="425" height="150" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDKKE73Wjtg-Vwl491L9OwndxtvjP5VDeY&q=<%=result.coordinate%>&center=<%=result.coordinate%>&zoom=15"></iframe>
+    </div>
+    <%}%>
+</main>
 
-      function initMap() {
-        var myLatLng = {lat: -25.363, lng: 131.044};
+<footer>
 
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: myLatLng
-        });
+    <p class="text-center text-muted"></p>
+</footer>
 
-        var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: 'Hello World!'
-        });
-      }
-    </script>
-
-<div class="Flexible-container">
-    <iframe width="425" height="150" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDKKE73Wjtg-Vwl491L9OwndxtvjP5VDeY&q=<%=result.coordinate%>&center=<%=result.coordinate%>&zoom=15"></iframe>
-</div>
-    </main>
-
-    <footer>
-        
-<p class="text-center text-muted"></p>
-    </footer>
-    
 </body>
 </html>
 

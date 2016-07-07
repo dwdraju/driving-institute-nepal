@@ -2,150 +2,148 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<title>Driving Centres in Nepal</title>
-
-<!-- CSS (load bootstrap from a CDN) -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link href="http://bootstrapformhelpers.com/assets/css/bootstrap-formhelpers.min.css" rel="stylesheet">
-<style>
-    body    { padding-top:50px; }
-</style>
+    <title>Driving Centres in Nepal</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="http://bootstrapformhelpers.com/assets/css/bootstrap-formhelpers.min.css" rel="stylesheet">
+    <style>
+        body    { padding-top:50px; }
+    </style>
 </head>
 <body class="container">
 
     <header>
         <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
+            <div class="container-fluid">
 
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">
-                <span class="glyphicon glyphicon glyphicon-map-marker"></span>
-                Driving Centres in Nepal
-            </a>
-        </div>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">
+                        <span class="glyphicon glyphicon glyphicon-map-marker"></span>
+                        Driving Centres in Nepal
+                    </a>
+                </div>
 
-        <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/add">Add</a></li>
-        </ul>
-      
-    </div>
-</nav>
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/add">Add</a></li>
+                </ul>
+
+            </div>
+        </nav>
     </header>
 
     <main>
-    <div class="row">
-    <div class="col-md-6">
-        <form method="post" action="/centres/edit/<%=result.permalink%>">
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post" action="/centres/edit/<%=result.permalink%>">
 
-    <div class="form-group"> <!-- Name -->
-        <label for="title" class="control-label">Name of Driving Centre</label>
-        <input type="text" class="form-control" id="name" name="title" value="<%=result.title%>">
-    </div>
+                    <div class="form-group"> <!-- Name -->
+                        <label for="title" class="control-label">Name of Driving Centre</label>
+                        <input type="text" class="form-control" id="name" name="title" value="<%=result.title%>">
+                    </div>
 
-    <div class="form-group"> <!-- Location -->
-        <label for="description" class="control-label">Location</label>
-        <input type="text" class="form-control" id="location" name="location" value="<%=result.location%>">
-    </div> 
-    <div class="form-group"> <!-- Phone Number -->
-        <label for="description" class="control-label">Phone Number</label>
-        <input type="text" class="form-control" id="phone" name="phone" value="<%=result.phone%>">
-    </div> 
-    <div class="form-group"> 
-        <label for="description" class="control-label">Mobile Number</label>
-        <input type="text" class="form-control" id="mobile" name="mobile" value="<%=result.mobile%>">
-    </div> 
-    <div class="form-group"> 
-    <label for="description" class="control-label">Select Services Available</label>
-    <label class="checkbox-inline"><input type="checkbox" <% if(result.bike== true){%> checked="checked" <%} %> value="true" name="bike" id="bike">Bike</label>
-    <label class="checkbox-inline"><input type="checkbox"  <% if(result.car== true){%> checked="checked" <%} %> value="true" name="car" id="car">Car</label>
-    <label class="checkbox-inline"><input type="checkbox" <% if(result.other== true){%> checked="checked" <%} %> value="true" name="other" id="other">Other</label>
-    </div>
-    <div class="form-group" <% if (result.bike==false){%> style="display: none" <%}%> id="biken">
-        <label for="description" class="control-label" >Number of Bike Available</label>
-        <input type="text" class="form-control bfh-number" id="bike_num" value="<%=result.bike_num%>"  name="bike_num" data-min="1" data-max="20">
-    </div> 
-    <div class="form-group" <% if (result.bike==false){%> style="display: none" <%}%> id="bikec">
-        <label for="description" class="control-label" >Charge for Bike/hr</label>
-        <input type="text" class="form-control bfh-number" id="bike_cost" name="bike_cost" data-min="1" data-max="2000">
-    </div>
-    <div class="form-group" <% if (result.car==false){%> style="display: none" <%}%> id="carn"> 
-        <label for="description" class="control-label">Number of Car Available</label>
-        <input type="text" class="form-control bfh-number" id="car_num" value="<%=result.car_num%>"  name="car_num" data-min="1" data-max="20">
-    </div>
-    <div class="form-group" <% if (result.car==false){%> style="display: none" <%}%> id="carc">
-        <label for="description" class="control-label" >Charge for Car/hr</label>
-        <input type="text" class="form-control bfh-number" value="<%=result.car_cost%>" id="car_cost" name="car_cost" data-min="1" data-max="2000">
-    </div> 
-    <div class="form-group" <% if (result.other==false){%> style="display: none" <%}%> id="others"> 
-        <label for="description" class="control-label">Specify Other</label>
-        <input type="text" class="form-control" id="other_sp" value="<%=result.other_sp%>" name="other_sp" placeholder="Bus/Truck">
-    </div>
-     
-     <div class="form-group"> 
-        <label for="description" class="control-label">Description/Comment</label>
-        <textarea class="form-control" id="description" name="description" value="<%=result.description%>"" rows="5"></textarea>
-    </div> 
+                    <div class="form-group"> <!-- Location -->
+                        <label for="description" class="control-label">Location</label>
+                        <input type="text" class="form-control" id="location" name="location" value="<%=result.location%>">
+                    </div> 
+                    <div class="form-group"> <!-- Phone Number -->
+                        <label for="description" class="control-label">Phone Number</label>
+                        <input type="text" class="form-control" id="phone" name="phone" value="<%=result.phone%>">
+                    </div> 
+                    <div class="form-group"> 
+                        <label for="description" class="control-label">Mobile Number</label>
+                        <input type="text" class="form-control" id="mobile" name="mobile" value="<%=result.mobile%>">
+                    </div> 
+                    <div class="form-group"> 
+                        <label for="description" class="control-label">Select Services Available</label>
+                        <label class="checkbox-inline"><input type="checkbox" <% if(result.bike== true){%> checked="checked" <%} %> value="true" name="bike" id="bike">Bike</label>
+                        <label class="checkbox-inline"><input type="checkbox"  <% if(result.car== true){%> checked="checked" <%} %> value="true" name="car" id="car">Car</label>
+                        <label class="checkbox-inline"><input type="checkbox" <% if(result.other== true){%> checked="checked" <%} %> value="true" name="other" id="other">Other</label>
+                    </div>
+                    <div class="form-group" <% if (result.bike==false){%> style="display: none" <%}%> id="biken">
+                        <label for="description" class="control-label" >Number of Bike Available</label>
+                        <input type="text" class="form-control bfh-number" id="bike_num" value="<%=result.bike_num%>"  name="bike_num" data-min="1" data-max="20">
+                    </div> 
+                    <div class="form-group" <% if (result.bike==false){%> style="display: none" <%}%> id="bikec">
+                        <label for="description" class="control-label" >Charge for Bike/hr</label>
+                        <input type="text" class="form-control bfh-number" id="bike_cost" name="bike_cost" data-min="1" data-max="2000">
+                    </div>
+                    <div class="form-group" <% if (result.car==false){%> style="display: none" <%}%> id="carn"> 
+                        <label for="description" class="control-label">Number of Car Available</label>
+                        <input type="text" class="form-control bfh-number" id="car_num" value="<%=result.car_num%>"  name="car_num" data-min="1" data-max="20">
+                    </div>
+                    <div class="form-group" <% if (result.car==false){%> style="display: none" <%}%> id="carc">
+                        <label for="description" class="control-label" >Charge for Car/hr</label>
+                        <input type="text" class="form-control bfh-number" value="<%=result.car_cost%>" id="car_cost" name="car_cost" data-min="1" data-max="2000">
+                    </div> 
+                    <div class="form-group" <% if (result.other==false){%> style="display: none" <%}%> id="others"> 
+                        <label for="description" class="control-label">Specify Other</label>
+                        <input type="text" class="form-control" id="other_sp" value="<%=result.other_sp%>" name="other_sp" placeholder="Bus/Truck">
+                    </div>
+
+                    <div class="form-group"> 
+                        <label for="description" class="control-label">Description/Comment</label>
+                        <textarea class="form-control" id="description" name="description" value="<%=result.description%>"" rows="5"></textarea>
+                    </div> 
 
 
-    <div class="form-group" style="display:none"> 
-        <label for="description" class="control-label">Coordinates</label>
-        <input type="text" class="form-control" id="coordinate" value="<%=result.coordinate%>" name="coordinate" placeholder="Baneshwor">
-    </div> 
-  
-    <div class="form-group"> <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>     
-    
-</form>
-</div>
-<div class="col-md-6">
-            <p style="font-size: 18px; font-weight:bold;margin-top:1rem;">Select the location of Driving Institute on the map</p>
-            <div id="map" style="border:1px solid #ccc; height:300px">
+                    <div class="form-group" style="display:none"> 
+                        <label for="description" class="control-label">Coordinates</label>
+                        <input type="text" class="form-control" id="coordinate" value="<%=result.coordinate%>" name="coordinate" placeholder="Baneshwor">
+                    </div> 
 
+                    <div class="form-group"> <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>     
+
+                </form>
             </div>
-            <script>
-                var map;
-                var gmarkers = [];
-                function removeMarkers(){
-                    for(i=0; i<gmarkers.length; i++){
-                        gmarkers[i].setMap(null);
+            <div class="col-md-6">
+                <p style="font-size: 18px; font-weight:bold;margin-top:1rem;">Select the location of Driving Institute on the map</p>
+                <div id="map" style="border:1px solid #ccc; height:300px">
+
+                </div>
+                <script>
+                    var map;
+                    var gmarkers = [];
+                    function removeMarkers(){
+                        for(i=0; i<gmarkers.length; i++){
+                            gmarkers[i].setMap(null);
+                        }
                     }
-                }
 
-                function initMap() {
+                    function initMap() {
 
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        center: {lat: 27.7172, lng: 85.3240},
-                        zoom: 15
-                    });
-
-
-
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function(position) {
-                            var pos = {
-                                lat: position.coords.latitude,
-                                lng: position.coords.longitude
-                            };
-
-                            map.setCenter(pos);
-                        }, function() {
-                            handleLocationError(true, null, map.getCenter());
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: {lat: 27.7172, lng: 85.3240},
+                            zoom: 15
                         });
-                    } else {
-                        handleLocationError(false, null, map.getCenter());
-                    }
 
-                    var geocoder = new google.maps.Geocoder;
 
-                    map.addListener('click',function(event){
-                        removeMarkers();
-                        console.log(event.latLng);
-                        var pos = {
-                            lat: event.latLng.lat(),
-                            lng: event.latLng.lng()
-                        };
+
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(function(position) {
+                                var pos = {
+                                    lat: position.coords.latitude,
+                                    lng: position.coords.longitude
+                                };
+
+                                map.setCenter(pos);
+                            }, function() {
+                                handleLocationError(true, null, map.getCenter());
+                            });
+                        } else {
+                            handleLocationError(false, null, map.getCenter());
+                        }
+
+                        var geocoder = new google.maps.Geocoder;
+
+                        map.addListener('click',function(event){
+                            removeMarkers();
+                            console.log(event.latLng);
+                            var pos = {
+                                lat: event.latLng.lat(),
+                                lng: event.latLng.lng()
+                            };
 
                         //map.panTo(pos);
 
@@ -157,7 +155,7 @@
                                         map: map
                                     });
                                     gmarkers.push(marker);
-                                    console.log(results[1].formatted_address);
+                                    document.getElementById("location").value = results[1].formatted_address;
                                     document.getElementById("coordinate").value = Math.round(pos.lat*10000)/10000+","+Math.round(pos.lng*10000)/10000;
                                 } else {
                                     window.alert('No results found');
@@ -168,55 +166,55 @@
                         });
                     })
 
-                }
-            </script>
+                    }
+                </script>
 
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKKE73Wjtg-Vwl491L9OwndxtvjP5VDeY&callback=initMap"
-            async defer></script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKKE73Wjtg-Vwl491L9OwndxtvjP5VDeY&callback=initMap"
+                async defer></script>
+            </div>
         </div>
-    </div>
     </main>
 
     <footer>
-        
-<p class="text-center text-muted"></p>
+
+        <p class="text-center text-muted"></p>
     </footer>
     
-<script src="http://bootstrapformhelpers.com/assets/js/jquery-1.10.2.min.js"></script>
-<script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
-<script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
-<script type="text/javascript">
-    $(function () {
-        $("#bike").click(function () {
-            if ($(this).is(":checked")) {
-                $("#biken").show();
-                $("#bikec").show();
-            } else {
-                $("#biken").hide();
-                $("#bikec").hide();
-            }
+    <script src="http://bootstrapformhelpers.com/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="http://bootstrapformhelpers.com/assets/js/bootstrap.min.js"></script>
+    <script src="http://bootstrapformhelpers.com/assets/js/bootstrap-formhelpers.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#bike").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#biken").show();
+                    $("#bikec").show();
+                } else {
+                    $("#biken").hide();
+                    $("#bikec").hide();
+                }
+            });
         });
-    });
-    $(function () {
-        $("#car").click(function () {
-            if ($(this).is(":checked")) {
-                $("#carn").show();
-                $("#carc").show();
-            } else {
-                $("#carn").hide();
-                $("#carc").hide();
-            }
+        $(function () {
+            $("#car").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#carn").show();
+                    $("#carc").show();
+                } else {
+                    $("#carn").hide();
+                    $("#carc").hide();
+                }
+            });
         });
-    });
-    $(function () {
-        $("#other").click(function () {
-            if ($(this).is(":checked")) {
-                $("#others").show();
-            } else {
-                $("#others").hide();
-            }
+        $(function () {
+            $("#other").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#others").show();
+                } else {
+                    $("#others").hide();
+                }
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>

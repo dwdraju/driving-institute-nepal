@@ -2,55 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<title>Driving Centres in Nepal</title>
-
-<!-- CSS (load bootstrap from a CDN) -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<style>
-    body    { padding-top:50px; }
-</style>
+    <title>Driving Centres in Nepal</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <style>
+        body{ padding-top:50px; }
+    </style>
 </head>
 <body class="container">
-
-    <header>
-        <nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">
-                <span class="glyphicon glyphicon glyphicon-map-marker"></span>
-                Driving Centres in Nepal
-            </a>
-        </div>
-
-        <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/add">Add</a></li>
-        </ul>
-      
-    </div>
-</nav>
-    </header>
-
-    <main>
-    <%for (var i in result){%>
-        <div class="panel panel-default">
-    <div class="panel-body"><%=result[i].title%></div> 
-    <div class="panel-footer clearfix">
-        <div class="pull-right">
-            <a href="/centres/edit/<%=result[i].permalink%>" class="btn btn-primary">Edit</a>
-            <a href="/centres/<%=result[i].permalink%>" class="btn btn-primary">Detail</a>
+    <% if(success && success.length > 0){%>
+    <div class="alert alert-success">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Success!</strong> The entry is successfully deleted.
+  </div>
+  <% } %>
+  <header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    <span class="glyphicon glyphicon glyphicon-map-marker"></span>
+                    Driving Centres in Nepal
+                </a>
             </div>
-    </div>
-</div>
-       <% }%>
-        
-    </main>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/add">Add</a></li>
+            </ul>
 
-    <footer>
-        
-<p class="text-center text-muted"></p>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <%for (var i in result){%>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-body"><%=result[i].title%></div> 
+            <div class="panel-footer clearfix">
+                <img style="padding-bottom:5px;" class="img-responsive img-rounded centre-image" src="../images/driving-centre.jpg"/>
+                <div class="pull-right">
+                    <a href="/centres/<%=result[i].permalink%>" class="btn btn-primary">Detail</a>
+                    <a href="/centres/edit/<%=result[i].permalink%>" class="btn btn-success">Edit</a>
+                    <a href="/centres/delete/<%=result[i].permalink%>" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div></div>
+        <% }%>
+    </main>
+    <footer>            
+        <p class="text-center text-muted"></p>
     </footer>
-    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
