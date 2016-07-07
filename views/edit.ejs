@@ -36,61 +36,61 @@
     <main>
     <div class="row">
     <div class="col-md-6">
-        <form method="post" action="/add">
+        <form method="post" action="/centres/edit/<%=result.permalink%>">
 
     <div class="form-group"> <!-- Name -->
         <label for="title" class="control-label">Name of Driving Centre</label>
-        <input type="text" class="form-control" id="name" name="title" placeholder="Kantipur Driving Institute">
+        <input type="text" class="form-control" id="name" name="title" value="<%=result.title%>">
     </div>
 
     <div class="form-group"> <!-- Location -->
         <label for="description" class="control-label">Location</label>
-        <input type="text" class="form-control" id="location" name="location" placeholder="Baneshwor">
+        <input type="text" class="form-control" id="location" name="location" value="<%=result.location%>">
     </div> 
     <div class="form-group"> <!-- Phone Number -->
         <label for="description" class="control-label">Phone Number</label>
-        <input type="text" class="form-control" id="phone" name="phone" placeholder="01XXXXXX">
+        <input type="text" class="form-control" id="phone" name="phone" value="<%=result.phone%>">
     </div> 
     <div class="form-group"> 
         <label for="description" class="control-label">Mobile Number</label>
-        <input type="text" class="form-control" id="mobile" name="mobile" placeholder="98XXXXXXXX">
+        <input type="text" class="form-control" id="mobile" name="mobile" value="<%=result.mobile%>">
     </div> 
     <div class="form-group"> 
     <label for="description" class="control-label">Select Services Available</label>
-    <label class="checkbox-inline"><input type="checkbox" value="true" name="bike" id="bike">Bike</label>
-    <label class="checkbox-inline"><input type="checkbox" value="true" name="car" id="car">Car</label>
-    <label class="checkbox-inline"><input type="checkbox" value="true" name="other" id="other">Other</label>
+    <label class="checkbox-inline"><input type="checkbox" <% if(result.bike== true){%> checked="checked" <%} %> value="<%=result.bike%>" name="bike" id="bike">Bike</label>
+    <label class="checkbox-inline"><input type="checkbox" value="<%=result.car%>" name="car" id="car">Car</label>
+    <label class="checkbox-inline"><input type="checkbox" value="<%=result.other%>" name="other" id="other">Other</label>
     </div>
-    <div class="form-group" style="display: none" id="biken">
+    <div class="form-group" <% if (result.bike==false){%> style="display: none" <%}%> id="biken">
         <label for="description" class="control-label" >Number of Bike Available</label>
-        <input type="text" class="form-control bfh-number" id="bike_num" name="bike_num" data-min="1" data-max="20">
+        <input type="text" class="form-control bfh-number" id="bike_num" value="<%=result.bike_num%> name="bike_num" data-min="1" data-max="20">
     </div> 
-    <div class="form-group" style="display: none" id="bikec">
+    <div class="form-group" <% if (result.bike==false){%> style="display: none" <%}%> id="bikec">
         <label for="description" class="control-label" >Charge for Bike/hr</label>
         <input type="text" class="form-control bfh-number" id="bike_cost" name="bike_cost" data-min="1" data-max="2000">
     </div>
-    <div class="form-group" style="display: none" id="carn"> 
+    <div class="form-group" <% if (result.car==false){%> style="display: none" <%}%> id="carn"> 
         <label for="description" class="control-label">Number of Car Available</label>
-        <input type="text" class="form-control bfh-number" id="car_num" name="car_num" data-min="1" data-max="20">
+        <input type="text" class="form-control bfh-number" id="car_num" value="<%=result.car_num%> name="car_num" data-min="1" data-max="20">
     </div>
-    <div class="form-group" style="display: none" id="carc">
+    <div class="form-group" <% if (result.car==false){%> style="display: none" <%}%> id="carc">
         <label for="description" class="control-label" >Charge for Car/hr</label>
-        <input type="text" class="form-control bfh-number" id="car_cost" name="car_cost" data-min="1" data-max="2000">
+        <input type="text" class="form-control bfh-number" value="<%=result.car_cost%> id="car_cost" name="car_cost" data-min="1" data-max="2000">
     </div> 
-    <div class="form-group" style="display: none" id="others"> 
+    <div class="form-group" <% if (result.other==false){%> style="display: none" <%}%> id="others"> 
         <label for="description" class="control-label">Specify Other</label>
-        <input type="text" class="form-control" id="other_sp" name="other_sp" placeholder="Bus/Truck">
+        <input type="text" class="form-control" id="other_sp" value="<%=result.other_sp%> name="other_sp" placeholder="Bus/Truck">
     </div>
      
      <div class="form-group"> 
         <label for="description" class="control-label">Description/Comment</label>
-        <textarea class="form-control" id="description" name="description" rows="5"></textarea>
+        <textarea class="form-control" id="description" name="description" value="<%=result.description%> rows="5"></textarea>
     </div> 
 
 
     <div class="form-group" style="display:none"> 
         <label for="description" class="control-label">Coordinates</label>
-        <input type="text" class="form-control" id="coordinate" name="coordinate" placeholder="Baneshwor">
+        <input type="text" class="form-control" id="coordinate" value="<%=result.coordinate%> name="coordinate" placeholder="Baneshwor">
     </div> 
   
     <div class="form-group"> <!-- Submit Button -->
