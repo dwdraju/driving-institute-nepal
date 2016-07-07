@@ -34,7 +34,8 @@
     </header>
 
     <main>
-    <div>
+    <div class="row">
+    <div class="col-md-4">
         Name of Driving Center: <%= result.title%> <br/>
         Location: <%= result.location%> <br/>
         Phone No.: <%= result.phone%> <br/>
@@ -48,10 +49,16 @@
         Number of Car Available: <%= result.car_num%><br/>
         Charge for Car/hr: <%= result.car_cost%><br/>
         <% }%>
-        Other Facilities: <%= result.other%><br/>
+        <% if(result.other == true){%>
+        Other Facilities: <%= result.other_sp%><br/>
+        <% }%>
         Description/Comment: <%= result.description%><br/>
         Coordinate: <%= result.coordinate %><br />
 
+    </div>
+    <div class="col-md-8">
+        <iframe width="427" height="240" src="https://www.youtube.com/embed/3u4eLonVccw" frameborder="0" allowfullscreen></iframe>
+    </div>
     </div>
     <!-- Responsive iFrame -->
     <script type="text/javascript">
@@ -77,7 +84,7 @@
     </script>
 
 <div class="Flexible-container">
-    <iframe width="425" height="150" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDKKE73Wjtg-Vwl491L9OwndxtvjP5VDeY&center=27.6947573,85.3223087&zoom=15"></iframe>
+    <iframe width="425" height="150" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDKKE73Wjtg-Vwl491L9OwndxtvjP5VDeY&q=<%=result.coordinate%>&center=<%=result.coordinate%>&zoom=15"></iframe>
 </div>
     </main>
 
@@ -88,3 +95,5 @@
     
 </body>
 </html>
+
+

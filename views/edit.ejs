@@ -57,13 +57,13 @@
     </div> 
     <div class="form-group"> 
     <label for="description" class="control-label">Select Services Available</label>
-    <label class="checkbox-inline"><input type="checkbox" <% if(result.bike== true){%> checked="checked" <%} %> value="<%=result.bike%>" name="bike" id="bike">Bike</label>
-    <label class="checkbox-inline"><input type="checkbox" value="<%=result.car%>" name="car" id="car">Car</label>
-    <label class="checkbox-inline"><input type="checkbox" value="<%=result.other%>" name="other" id="other">Other</label>
+    <label class="checkbox-inline"><input type="checkbox" <% if(result.bike== true){%> checked="checked" <%} %> value="true" name="bike" id="bike">Bike</label>
+    <label class="checkbox-inline"><input type="checkbox"  <% if(result.car== true){%> checked="checked" <%} %> value="true" name="car" id="car">Car</label>
+    <label class="checkbox-inline"><input type="checkbox" <% if(result.other== true){%> checked="checked" <%} %> value="true" name="other" id="other">Other</label>
     </div>
     <div class="form-group" <% if (result.bike==false){%> style="display: none" <%}%> id="biken">
         <label for="description" class="control-label" >Number of Bike Available</label>
-        <input type="text" class="form-control bfh-number" id="bike_num" value="<%=result.bike_num%> name="bike_num" data-min="1" data-max="20">
+        <input type="text" class="form-control bfh-number" id="bike_num" value="<%=result.bike_num%>"  name="bike_num" data-min="1" data-max="20">
     </div> 
     <div class="form-group" <% if (result.bike==false){%> style="display: none" <%}%> id="bikec">
         <label for="description" class="control-label" >Charge for Bike/hr</label>
@@ -71,26 +71,26 @@
     </div>
     <div class="form-group" <% if (result.car==false){%> style="display: none" <%}%> id="carn"> 
         <label for="description" class="control-label">Number of Car Available</label>
-        <input type="text" class="form-control bfh-number" id="car_num" value="<%=result.car_num%> name="car_num" data-min="1" data-max="20">
+        <input type="text" class="form-control bfh-number" id="car_num" value="<%=result.car_num%>"  name="car_num" data-min="1" data-max="20">
     </div>
     <div class="form-group" <% if (result.car==false){%> style="display: none" <%}%> id="carc">
         <label for="description" class="control-label" >Charge for Car/hr</label>
-        <input type="text" class="form-control bfh-number" value="<%=result.car_cost%> id="car_cost" name="car_cost" data-min="1" data-max="2000">
+        <input type="text" class="form-control bfh-number" value="<%=result.car_cost%>" id="car_cost" name="car_cost" data-min="1" data-max="2000">
     </div> 
     <div class="form-group" <% if (result.other==false){%> style="display: none" <%}%> id="others"> 
         <label for="description" class="control-label">Specify Other</label>
-        <input type="text" class="form-control" id="other_sp" value="<%=result.other_sp%> name="other_sp" placeholder="Bus/Truck">
+        <input type="text" class="form-control" id="other_sp" value="<%=result.other_sp%>" name="other_sp" placeholder="Bus/Truck">
     </div>
      
      <div class="form-group"> 
         <label for="description" class="control-label">Description/Comment</label>
-        <textarea class="form-control" id="description" name="description" value="<%=result.description%> rows="5"></textarea>
+        <textarea class="form-control" id="description" name="description" value="<%=result.description%>"" rows="5"></textarea>
     </div> 
 
 
     <div class="form-group" style="display:none"> 
         <label for="description" class="control-label">Coordinates</label>
-        <input type="text" class="form-control" id="coordinate" value="<%=result.coordinate%> name="coordinate" placeholder="Baneshwor">
+        <input type="text" class="form-control" id="coordinate" value="<%=result.coordinate%>" name="coordinate" placeholder="Baneshwor">
     </div> 
   
     <div class="form-group"> <!-- Submit Button -->
@@ -158,7 +158,6 @@
                                     });
                                     gmarkers.push(marker);
                                     console.log(results[1].formatted_address);
-                                    document.getElementById("address").value = results[1].formatted_address;
                                     document.getElementById("coordinate").value = Math.round(pos.lat*10000)/10000+","+Math.round(pos.lng*10000)/10000;
                                 } else {
                                     window.alert('No results found');

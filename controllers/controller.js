@@ -5,7 +5,7 @@ module.exports = {
 		DriveModel.find({}, function(err, data) {
 			if (err) { throw err; }
 			else{
-				console.log(data)
+				
 				res.render('index', {result:data});
 			}
 		});
@@ -91,7 +91,7 @@ module.exports = {
 		description = req.body.description,
 		permalink = req.params.permalink
 		;
-		
+
 		
 		DriveModel.findOne({permalink: permalink}, function(err, data) {
 			if (err)
@@ -110,8 +110,24 @@ module.exports = {
 				other_sp: other_sp,
 				coordinate: coordinate,
 				location: location,
+				description: description
 			});
-			DriveModel.update({_id:data._id}, newData, function(err, result) {
+			DriveModel.update({_id:data._id}, {
+				title: title,
+				phone: phone,
+				mobile: mobile,
+				bike: bike,
+				car: car,
+				other: other,
+				bike_num: bike_num,
+				car_num: car_num,
+				bike_cost: bike_cost,
+				car_cost: car_cost,
+				other_sp: other_sp,
+				coordinate: coordinate,
+				location: location,
+				description: description
+			}, function(err, result) {
 				if (err)
 					res.send(err);
 				else{res.redirect('/centres/'+permalink);}                
