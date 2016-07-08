@@ -79,7 +79,7 @@ module.exports = {
 		phone = req.body.phone,
 		mobile = req.body.mobile,
 		bike = req.body.bike,
-		car = req.body.bike,
+		car = req.body.car,
 		other = req.body.other,
 		bike_num = req.body.bike_num,
 		car_num = req.body.car_num,
@@ -91,27 +91,12 @@ module.exports = {
 		description = req.body.description,
 		permalink = req.params.permalink
 		;
-
+console.log(bike);
+console.log(car);
 		
 		DriveModel.findOne({permalink: permalink}, function(err, data) {
 			if (err)
 				res.send(err);
-			var newData = new DriveModel({
-				title: title,
-				phone: phone,
-				mobile: mobile,
-				bike: bike,
-				car: car,
-				other: other,
-				bike_num: bike_num,
-				car_num: car_num,
-				bike_cost: bike_cost,
-				car_cost: car_cost,
-				other_sp: other_sp,
-				coordinate: coordinate,
-				location: location,
-				description: description
-			});
 			DriveModel.update({_id:data._id}, {
 				title: title,
 				phone: phone,
