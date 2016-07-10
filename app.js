@@ -12,15 +12,20 @@ var session = require('express-session');
 var sessionStore = new session.MemoryStore;
 
 var mongo = require('mongodb');
-mongoose.connect('mongodb://localhost/driving');
-mongoose.connection.on('open', function() {
-  console.log('Mongoose connected.');
-});
+var config = require('./config');
 
 var routes = require('./routes/index');
 var centres = require('./routes/centres');
 
 var app = express();
+mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
+  if(err) {
+    console.log('Error connecting to the database. ' + err);
+  } else {
+    console.log('Connected to Database: ' + config.mongoURI[app.settings.env]);
+  }
+});
+
 app.use(cookieParser('secret'));
 app.use(session({
   cookie: { maxAge: 60000 },

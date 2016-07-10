@@ -5,7 +5,7 @@ router.get('/:permalink',controller.single);
 
 router.get('/',controller.index);
 
-router.post('/add',controller.add);
+router.post('/',controller.add);
 router.get('/edit/:permalink',controller.edit);
 router.post('/edit/:permalink',controller.save);
 router.get('/delete/:permalink',controller.delete);

@@ -5,8 +5,11 @@ module.exports = {
 		DriveModel.find({}, function(err, data) {
 			if (err) { throw err; }
 			else{
-				
-				res.render('index', {result:data});
+				if(process.env.NODE_ENV == 'test'){
+					res.json(data);
+				}else{
+					res.render('index', {result:data});
+				}
 			}
 		});
 
@@ -53,24 +56,27 @@ module.exports = {
 				res.json(err);
 			}
 			else{
-				res.redirect('/centres/'+permalink);
+				if(process.env.NODE_ENV == 'test'){
+					res.json({'Success':data});
+				}else
+					res.redirect('/centres/'+permalink);
 			}
 		});
 	},
 	single: function(req, res, next){
 		DriveModel.findOne({permalink:req.params.permalink},function(err, data){
-			res.render('single',{result:data});
+			if(process.env.NODE_ENV == 'test'){
+				res.json(data);
+			}else{
+				res.render('single',{result:data});
+			}
 		});
 	},
 
-	edit:function(req,res,next){
-
-
-		
+	edit:function(req,res,next){		
 		DriveModel.findOne({permalink:req.params.permalink},function(err, data){
 			res.render('edit',{result:data});
-		});
-		
+		});	
 
 	},
 
@@ -91,31 +97,37 @@ module.exports = {
 		description = req.body.description,
 		permalink = req.params.permalink
 		;
-console.log(bike);
-console.log(car);
 		
 		DriveModel.findOne({permalink: permalink}, function(err, data) {
-			if (err)
+			if (err){
 				res.send(err);
-			DriveModel.update({_id:data._id}, {
-				title: title,
-				phone: phone,
-				mobile: mobile,
-				bike: bike,
-				car: car,
-				other: other,
-				bike_num: bike_num,
-				car_num: car_num,
-				bike_cost: bike_cost,
-				car_cost: car_cost,
-				other_sp: other_sp,
-				coordinate: coordinate,
-				location: location,
-				description: description
-			}, function(err, result) {
-				if (err)
+			}
+			data.title = title;
+			data.phone = phone;
+			data.mobile = mobile;
+			data.bike = bike;
+			data.car = car;
+			data.other = other;
+			data.bike_num = bike_num;
+			data.car_num = car_num;
+			data.bike_cost = bike_cost;
+			data.car_cost = car_cost;
+			data.other_sp = other_sp;
+			data.coordinate = coordinate;
+			data.location = location;
+			data.description = description;
+
+			data.save(function(err, result) {
+				if (err){
 					res.send(err);
-				else{res.redirect('/centres/'+permalink);}                
+				}
+				else{
+					if(process.env.NODE_ENV == 'test'){
+						res.json({'UPDATED':result});
+					}else{
+					res.redirect('/centres/'+permalink);
+				}
+				}       
 			});
 		});
 	},
@@ -125,12 +137,16 @@ console.log(car);
 			if (err)
 				res.send(err);
 			DriveModel.remove({_id:data._id}, function(err, result) {
-			if (err)
-				res.send(err);
-			else{
-
-				req.flash('success', 'The centre was successfully deletedd');
-				res.redirect("/");}                
+				if (err)
+					res.send(err);
+				else{
+					if(process.env.NODE_ENV == 'test'){
+						res.json({'REMOVED':data});
+					}else{
+						req.flash('success', 'The centre was successfully deletedd');
+						res.redirect("/");
+					}
+				}                
 			});
 		});
 
